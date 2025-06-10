@@ -1,0 +1,46 @@
+name: Pre-Release Check [Manual]
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  pre-release-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - name: Configure Git
+        run: |
+          git config --global user.name $CONFIG_USERNAME
+          git config --global user.email $CONFIG_EMAIL
+        env:
+          CONFIG_USERNAME: ${{ vars.RELEASE_COMMIT_USERNAME }}
+          CONFIG_EMAIL: ${{ vars.RELEASE_COMMIT_EMAIL }}
+
+      - name: Set Git Remote with Auth Token
+        run: |
+          git remote set-url origin https://${RELEASE_COMMIT_USERNAME}:${GITHUB_PAT}@github.com/sourcefuse/arc-spa-csp
+        env:
+          GITHUB_PAT: ${{ secrets.RELEASE_COMMIT_GH_PAT }}
+          RELEASE_COMMIT_USERNAME: ${{ vars.RELEASE_COMMIT_USERNAME }}
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Tests
+        run: npm run test
+
+      - name: Run Semantic Release in Dry Run Mode
+        run: npx semantic-release --dry-run
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_COMMIT_GH_PAT }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

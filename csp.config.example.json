@@ -1,0 +1,15 @@
+{
+  "directives": {
+    "default-src": ["'self'"],
+    "script-src": ["'self'", "{{REACT_APP_API_URL}}", "{{NG_APIURL}}"],
+    "style-src": ["'self'", "'unsafe-inline'"],
+    "img-src": ["'self'", "data:", "blob:", "{{REACT_APP_CDN_URL}}"],
+    "font-src": ["'self'", "data:"],
+    "connect-src": ["'self'", "{{REACT_APP_API_URL}}", "{{NG_APIURL}}"],
+    "worker-src": ["'self'", "blob:"],
+    "manifest-src": ["'self'"]
+  },
+  "useNonce": true,
+  "nonceLength": 24,
+  "reportOnly": false
+}

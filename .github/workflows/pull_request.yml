@@ -1,0 +1,33 @@
+on: pull_request
+name: Lint npm packages on pull request
+
+jobs:
+  npmLint:
+    name: npm lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v2
+
+      - name: Cache node modules
+        id: cache-nodemodules
+        uses: actions/cache@v3
+        env:
+          cache-name: ${{ github.event.repository.name }}
+        with:
+          # caching node_modules
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+
+      - name: Run npm install
+        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Run tests for all workspaces
+        run: npm run test
+
+      - name: Run lint for all workspaces
+        run: npm run lint 

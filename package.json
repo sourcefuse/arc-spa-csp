@@ -1,0 +1,179 @@
+{
+  "name": "arc-spa-csp",
+  "version": "1.0.0",
+  "description": "Content Security Policy (CSP) injector for Applications - React, Angular, and VITE projects with comprehensive environment variable support",
+  "main": "dist/index.js",
+  "bin": {
+    "arc-spa-csp": "./bin/arc-spa-csp.js"
+  },
+  "files": [
+    "dist/",
+    "bin/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "build": "npm run clean && npm run compile",
+    "compile": "tsc --project tsconfig.json",
+    "clean": "rimraf dist",
+    "test": "jest --coverage",
+    "test:unit": "jest --testPathPattern=test/unit --coverage || exit 0",
+    "test:integration": "jest --testPathPattern=test/integration --coverage",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --coverage --ci --watchAll=false --passWithNoTests",
+    "lint": "eslint src test --ext .ts,.js --fix",
+    "lint:check": "eslint src test --ext .ts,.js",
+    "format": "prettier --write \"src/**/*.{ts,js,json}\" \"test/**/*.{ts,js,json}\" ",
+    "format:check": "prettier --check \"src/**/*.{ts,js,json}\" \"test/**/*.{ts,js,json}\" ",
+    "type-check": "tsc --noEmit",
+    "validate": "npm run type-check && npm run lint:check && npm run format:check && npm run test:ci",
+    "security": "npm audit && npm run security:licenses",
+    "security:licenses": "license-checker --summary",
+    "prepublishOnly": "npm run validate && npm run security",
+    "release": "npm run validate && npm run build && npm publish",
+    "release:dry": "npm run validate && npm run build && npm publish --dry-run",
+    "pre-commit": "lint-staged",
+    "prepare": "husky install",
+    "prettier:cli": "prettier \"**/*.ts\" \"**/*.js\" \"**/*.html\" ",
+    "prettier:check": "npm run prettier:cli -- -l",
+    "prettier:fix": "npm run prettier:cli -- --write"
+  },
+  "keywords": [
+    "csp",
+    "content-security-policy",
+    "angular",
+    "react",
+    "spa",
+    "single-page-application",
+    "security",
+    "enterprise",
+    "environment-variables",
+    "vite",
+    "webpack",
+    "build-tools",
+    "xss-protection",
+    "web-security",
+    "typescript"
+  ],
+  "author": {
+    "name": "SourceFuse",
+    "url": "https://www.sourcefuse.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sourcefuse/arc-spa-csp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sourcefuse/arc-spa-csp/issues"
+  },
+  "homepage": "https://github.com/sourcefuse/arc-spa-csp#readme",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "fs-extra": "^11.2.0",
+    "glob": "^10.3.10",
+    "minimist": "^1.2.8"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^19.8.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.3",
+    "@semantic-release/npm": "^12.0.2",
+    "@semantic-release/release-notes-generator": "^14.0.3",
+    "@types/fs-extra": "^11.0.4",
+    "@types/jest": "^29.5.12",
+    "@types/minimist": "^1.2.5",
+    "@types/node": "^20.11.19",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^7.4.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jest": "^27.9.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-security": "^2.1.1",
+    "husky": "^8.0.2",
+    "jest": "^29.7.0",
+    "license-checker": "^25.0.1",
+    "lint-staged": "^15.2.5",
+    "nodemon": "^3.1.0",
+    "prettier": "^3.5.3",
+    "rimraf": "^5.0.5",
+    "semantic-release": "^24.2.6",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "directory": "dist"
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": "./.cz-config.cjs"
+    }
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "angular",
+          "releaseRules": [
+            {
+              "type": "chore",
+              "scope": "deps",
+              "release": "patch"
+            }
+          ]
+        }
+      ],
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "CHANGELOG.md"
+        }
+      ],
+      "@semantic-release/npm",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "package.json",
+            "CHANGELOG.md"
+          ],
+          "message": "chore(release): ${nextRelease.version} semantic"
+        }
+      ],
+      "@semantic-release/github"
+    ],
+    "repositoryUrl": "git@github.com:sourcefuse/arc-spa-csp.git"
+  }
+}

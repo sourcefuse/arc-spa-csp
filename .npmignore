@@ -1,0 +1,50 @@
+# Test files and directories
+test/
+*.test.js
+
+# Source TypeScript files (only ship compiled JS)
+src/
+tsconfig.json
+tsconfig.test.json
+jest.config.js
+
+# Development files
+.env
+.env.*
+csp.config.example.json
+
+# Debug and development scripts
+debug-*.js
+DEVELOPER_*.md
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Runtime data
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Build artifacts from other tools
+build/
+
+# Temporary files
+temp/
+tmp/
+
+# Note: bin/ directory should be included in package for CLI functionality
+# DO NOT exclude bin/ directory 
