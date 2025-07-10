@@ -1,8 +1,8 @@
-# 🛡️ @arc/spa-csp
+# 🛡️ arc-spa-csp
 
 > Content Security Policy (CSP) injector for Single Page Applications (SPAs) - React, Angular, and VITE projects with comprehensive framework support
 
-[![npm version](https://badge.fury.io/js/%40arc%2Fspa-csp.svg)](https://badge.fury.io/js/%40arc%2Fspa-csp)
+[![npm version](https://badge.fury.io/js/arc-spa-csp.svg)](https://www.npmjs.com/package/arc-spa-csp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
 [![Coverage](https://img.shields.io/badge/Coverage-74%25-orange.svg)](https://github.com/sourcefuse/arc-spa-csp)
@@ -26,7 +26,7 @@
 ### Installation
 
 ```bash
-npm install -g @arc/spa-csp
+npm install -g arc-spa-csp
 # or
 npx arc-spa-csp init  # Create default config
 ```
@@ -95,7 +95,7 @@ arc-spa-csp init
 arc-spa-csp init --interactive
 
 # Use with npx (no installation)
-npx @arc/spa-csp init --interactive
+npx arc-spa-csp init --interactive
 ```
 
 #### 🧙‍♂️ Interactive Configuration Wizard
@@ -117,7 +117,7 @@ arc-spa-csp init --interactive
 #### Example Interactive Session
 
 ```text
-🎉 Welcome to @arc/spa-csp configuration wizard!
+🎉 Welcome to arc-spa-csp configuration wizard!
 Let's set up your Content Security Policy configuration.
 
 🚀 Which framework are you using?
@@ -270,9 +270,7 @@ arc-spa-csp
 
 #### 🏗️ Angular Workspace Support
 
-**New in v2.2.0**: Full support for Angular workspace projects with proper environment isolation.
-
-**Problem Solved**: Previously, when targeting `projects/my-app/src/index.html`, the tool would load environment variables from the workspace root instead of the specific project.
+Full support for Angular workspace projects with proper environment isolation.
 
 **How it works**:
 
@@ -409,7 +407,7 @@ Create dynamic configurations with template variables:
 ## 🔧 API Usage
 
 ```typescript
-import { CSPInjector } from '@arc/spa-csp';
+import { CSPInjector } from 'arc-spa-csp';
 
 // Simple injection with auto-detection
 const result = CSPInjector.inject();
