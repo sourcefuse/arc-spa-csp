@@ -1,6 +1,6 @@
 {
   "name": "arc-spa-csp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Content Security Policy (CSP) injector for Applications - React, Angular, and VITE projects with comprehensive environment variable support",
   "main": "dist/index.js",
   "bin": {
