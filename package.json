@@ -175,5 +175,10 @@
       "@semantic-release/github"
     ],
     "repositoryUrl": "git@github.com:sourcefuse/arc-spa-csp.git"
+  },
+  "overrides": {
+    "@semantic-release/npm": {
+      "npm": "^11.7.0"
+    }
   }
 }
